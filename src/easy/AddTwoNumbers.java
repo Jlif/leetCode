@@ -18,36 +18,65 @@ package easy;
  */
 public class AddTwoNumbers {
 
-    class Solution {
-        public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-            ListNode dummyHead = new ListNode(0);
-            ListNode p = l1, q = l2, curr = dummyHead;
-            int carry = 0;
-            while (p != null || q != null) {
-                int x = (p != null) ? p.val : 0;
-                int y = (q != null) ? q.val : 0;
-                int sum = carry + x + y;
-                carry = sum / 10;
-                curr.next = new ListNode(sum % 10);
-                curr = curr.next;
-                if (p != null) p = p.next;
-                if (q != null) q = q.next;
-            }
-            if (carry > 0) {
-                curr.next = new ListNode(carry);
-            }
-            return dummyHead.next;
+    public static class ListNode {
+        int val;
+        ListNode next;
 
+        ListNode(int x) {
+            val = x;
+        }
+
+        @Override
+        public String toString() {
+            String str = String.valueOf(val);
+            ListNode tmp = next;
+            while (tmp != null) {
+                str = str + "->" + tmp.val;
+                tmp = tmp.next;
+            }
+            return str;
         }
     }
 
-    public class ListNode {
-        public int val;
-        public ListNode next;
-
-        public ListNode(int val) {
-            this.val = val;
-            this.next = null;
+    public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode head = new ListNode(0);
+        ListNode cur = head;
+        boolean flag = false;
+        ListNode tmp1 = l1;
+        ListNode tmp2 = l2;
+        while (tmp1 != null || tmp2 != null) {
+            int a = tmp1 == null ? 0 : tmp1.val;
+            int b = tmp2 == null ? 0 : tmp2.val;
+            int tmpResult = flag ? a + b + 1 : a + b;
+            if (tmpResult >= 10) {
+                cur.next = new ListNode(tmpResult - 10);
+                flag = true;
+            } else {
+                cur.next = new ListNode(tmpResult);
+                flag = false;
+            }
+            tmp1 = tmp1 == null ? null : tmp1.next;
+            tmp2 = tmp2 == null ? null : tmp2.next;
+            cur = cur.next;
         }
+        if (flag) {
+            cur.next = new ListNode(1);
+        }
+        return head.next;
     }
+
+    public static void main(String[] args) {
+        ListNode l1 = new ListNode(2);
+        l1.next = new ListNode(4);
+        l1.next.next = new ListNode(7);
+        l1.next.next.next = new ListNode(2);
+        System.out.println(l1.toString());
+
+        ListNode l2 = new ListNode(5);
+        l2.next = new ListNode(6);
+        l2.next.next = new ListNode(4);
+        System.out.println(l2.toString());
+        System.out.println(addTwoNumbers(l1, l2).toString());
+    }
+
 }

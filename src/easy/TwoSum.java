@@ -1,5 +1,6 @@
 package easy;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,50 +21,49 @@ import java.util.Map;
  */
 public class TwoSum {
     //暴力法
-    class Solution1 {
-        public int[] twoSum(int[] nums, int target) {
-            for (int i = 0; i < nums.length; i++) {
-                int x = nums[i];
-                for (int j = i + 1; j < nums.length; j++) {
-                    if (nums[j] + x == target) {
-                        return new int[]{i, j};
-                    }
+    public static int[] twoSum1(int[] nums, int target) {
+        for (int i = 0; i < nums.length; i++) {
+            int x = nums[i];
+            for (int j = i + 1; j < nums.length; j++) {
+                if (nums[j] + x == target) {
+                    return new int[]{i, j};
                 }
             }
-            throw new IllegalArgumentException("No such solution");
         }
+        throw new IllegalArgumentException("No such solution");
     }
 
     //两遍哈希表
-    class Solution2 {
-        public int[] twoSum(int[] nums, int target) {
-            Map<Integer, Integer> map = new HashMap<>();
-            for (int i = 0; i < nums.length; i++) {
-                map.put(nums[i], i);
-            }
-            for (int i = 0; i < nums.length; i++) {
-                int complement = target - nums[i];
-                if (map.containsKey(complement) && map.get(complement) != i) {
-                    return new int[]{i, map.get(complement)};
-                }
-            }
-            throw new IllegalArgumentException("No two sum solution");
+    public static int[] twoSum2(int[] nums, int target) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            map.put(nums[i], i);
         }
+        for (int i = 0; i < nums.length; i++) {
+            int complement = target - nums[i];
+            if (map.containsKey(complement) && map.get(complement) != i) {
+                return new int[]{i, map.get(complement)};
+            }
+        }
+        throw new IllegalArgumentException("No two sum solution");
     }
 
     //一遍哈希表
-    class Solution3 {
-        public int[] twoSum(int[] nums, int target) {
-            Map<Integer, Integer> map = new HashMap<>();
-            for (int i = 0; i < nums.length; i++) {
-                int complement = target - nums[i];
-                if (map.containsKey(complement)) {
-                    return new int[]{map.get(complement), i};
-                }
-                map.put(nums[i], i);
+    public static int[] twoSum3(int[] nums, int target) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int complement = target - nums[i];
+            if (map.containsKey(complement)) {
+                return new int[]{map.get(complement), i};
             }
-            throw new IllegalArgumentException("No two sum solution");
+            map.put(nums[i], i);
         }
+        throw new IllegalArgumentException("No two sum solution");
+    }
+
+    public static void main(String[] args) {
+        int[] source = {4, 8, 2, 9, 16, 32};
+        System.out.println(Arrays.toString(twoSum1(source, 11)));
     }
 
 }
