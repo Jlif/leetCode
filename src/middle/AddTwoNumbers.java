@@ -1,5 +1,7 @@
 package middle;
 
+import base.ListNode;
+
 /**
  * 给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。
  * <p>
@@ -17,26 +19,6 @@ package middle;
  * @date 2019/02/16
  */
 public class AddTwoNumbers {
-
-    public static class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-        }
-
-        @Override
-        public String toString() {
-            String str = String.valueOf(val);
-            ListNode tmp = next;
-            while (tmp != null) {
-                str = str + "->" + tmp.val;
-                tmp = tmp.next;
-            }
-            return str;
-        }
-    }
 
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode head = new ListNode(0);
