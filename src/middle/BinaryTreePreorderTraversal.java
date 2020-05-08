@@ -5,6 +5,7 @@ import struct.TreeNode;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * 给定一个二叉树，返回它的 前序 遍历。
@@ -35,6 +36,27 @@ public class BinaryTreePreorderTraversal {
             list.add(root.val);
             preorderTraversal(root.left);
             preorderTraversal(root.right);
+        }
+        return list;
+    }
+
+    //方法二：迭代
+    public List<Integer> preorderTraversal2(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        if (root == null) {
+            return list;
+        }
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode tmp = stack.pop();
+            list.add(tmp.val);
+            if (tmp.right != null) {
+                stack.push(tmp.right);
+            }
+            if (tmp.left != null) {
+                stack.push(tmp.left);
+            }
         }
         return list;
     }
