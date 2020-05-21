@@ -14,12 +14,13 @@ public class ListNode {
 
     @Override
     public String toString() {
-        String str = String.valueOf(val);
+        StringBuilder sb = new StringBuilder();
+        sb.append(val);
         ListNode tmp = next;
         while (tmp != null) {
-            str = str + "->" + tmp.val;
+            sb.append("->").append(tmp.val);
             tmp = tmp.next;
         }
-        return str;
+        return sb.toString();
     }
 }
