@@ -10,10 +10,12 @@ public class IntegerToRoman {
 
     public static String intToRoman(int num) {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < VALUES.length && num >= 0; i++) {
-            while (VALUES[i] <= num) {
-                num -= VALUES[i];
-                sb.append(SYMBOLS[i]);
+        if (num > 0) {
+            for (int i = 0; i < VALUES.length; i++) {
+                while (VALUES[i] <= num) {
+                    num -= VALUES[i];
+                    sb.append(SYMBOLS[i]);
+                }
             }
         }
         return sb.toString();
