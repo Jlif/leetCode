@@ -12,6 +12,24 @@ public class ListNode {
         val = x;
     }
 
+    public static ListNode initWithParams(int... args) {
+        if (args == null) {
+            return null;
+        }
+        ListNode node = null;
+        ListNode tmp = null;
+        for (int x : args) {
+            if (node == null) {
+                tmp = new ListNode(x);
+                node = tmp;
+            } else {
+                tmp.next = new ListNode(x);
+                tmp = tmp.next;
+            }
+        }
+        return node;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
