@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Stack;
 
 /**
- * 给定一个二叉树，返回它的 前序 遍历。
+ * 给定一个二叉树，返回它的  前序  遍历。
  * <p>
- *  示例:
+ *   示例:
  * <p>
  * 输入: [1,null,2,3]
  * 1
