@@ -80,9 +80,9 @@ public class ReverseNodesInKGroup {
             end.next = null;
             pre.next = reverse(start);
             start.next = next;
-            pre = start;
 
-            end = pre;
+            pre = start;
+            end = start;
         }
         return dummy.next;
     }
@@ -107,7 +107,7 @@ public class ReverseNodesInKGroup {
         l1.next.next.next.next = new ListNode(5);
         l1.next.next.next.next.next = new ListNode(6);
         l1.next.next.next.next.next.next = new ListNode(7);
-        System.out.println(reverseKGroup(l1, 2));
+        System.out.println(reverseKGroup2(l1, 2));
     }
 
 }
