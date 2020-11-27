@@ -24,33 +24,70 @@ import java.util.List;
  */
 public class ReorderList {
 
-    public static ListNode reorderList(ListNode head) {
-        List<ListNode> arr = new ArrayList<>();
+    //方法一：直接调换顺序
+    public static void reorderList(ListNode head) {
+        if (head == null) {
+            return;
+        }
+        List<ListNode> list = new ArrayList<>();
+        ListNode node = head;
+        while (node != null) {
+            list.add(node);
+            node = node.next;
+        }
+        int i = 0, j = list.size() - 1;
+        while (i < j) {
+            list.get(i).next = list.get(j);
+            i++;
+            if (i == j) {
+                break;
+            }
+            list.get(j).next = list.get(i);
+            j--;
+        }
+        list.get(i).next = null;
+    }
 
-        ListNode dummy = new ListNode(0);
-        ListNode temp = dummy;
-        arr.add(new ListNode(head.val));
-        while (head.next != null) {
-            arr.add(new ListNode(head.next.val));
-            head = head.next;
+    //法2：快慢指针找到中点，然后反转后半部分链表，然后合并
+    public static void reorderList2(ListNode head) {
+        if (head == null || head.next == null) {
+            return;
         }
-        int i;
-        for (i = 0; i < arr.size() - i - 1; i++) {
-            temp.next = arr.get(i);
-            temp = temp.next;
-            temp.next = arr.get(arr.size() - i - 1);
-            temp = temp.next;
+        //快慢指针求中点
+        ListNode slow = head;
+        ListNode fast = head;
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
         }
-        System.out.println(i);
+        //将后半部分链表反转
+        reverse(slow.next);
+        slow.next = null;
+        ListNode cur = head;
+        while (fast != null) {
+            ListNode pre = cur;
+            ListNode suf = fast;
+            pre.next = suf;
+            suf.next = cur.next;
+            cur = cur.next;
+            fast = fast.next;
+        }
+    }
 
-        if (arr.size() - i == i) {
-            temp.val = arr.get(i).val;
+    public static void reverse(ListNode head) {
+        ListNode pre = null;
+        ListNode cur = head;
+        while (cur != null) {
+            ListNode tmp = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = tmp;
         }
-        return dummy.next;
     }
 
     public static void main(String[] args) {
         ListNode list = ListNode.initWithParams(1, 2, 3, 4, 5, 6, 7);
-        System.out.println(reorderList(list));
+        reorderList2(list);
+        System.out.println(list);
     }
 }
