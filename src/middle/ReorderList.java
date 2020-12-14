@@ -48,46 +48,9 @@ public class ReorderList {
         list.get(i).next = null;
     }
 
-    //法2：快慢指针找到中点，然后反转后半部分链表，然后合并
-    public static void reorderList2(ListNode head) {
-        if (head == null || head.next == null) {
-            return;
-        }
-        //快慢指针求中点
-        ListNode slow = head;
-        ListNode fast = head;
-        while (fast.next != null && fast.next.next != null) {
-            slow = slow.next;
-            fast = fast.next.next;
-        }
-        //将后半部分链表反转
-        reverse(slow.next);
-        slow.next = null;
-        ListNode cur = head;
-        while (fast != null) {
-            ListNode pre = cur;
-            ListNode suf = fast;
-            pre.next = suf;
-            suf.next = cur.next;
-            cur = cur.next;
-            fast = fast.next;
-        }
-    }
-
-    public static void reverse(ListNode head) {
-        ListNode pre = null;
-        ListNode cur = head;
-        while (cur != null) {
-            ListNode tmp = cur.next;
-            cur.next = pre;
-            pre = cur;
-            cur = tmp;
-        }
-    }
-
     public static void main(String[] args) {
         ListNode list = ListNode.initWithParams(1, 2, 3, 4, 5, 6, 7);
-        reorderList2(list);
+        reorderList(list);
         System.out.println(list);
     }
 }
