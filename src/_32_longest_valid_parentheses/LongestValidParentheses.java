@@ -32,6 +32,12 @@ public class LongestValidParentheses {
         return maxans;
     }
 
+    /**
+     * 使用栈
+     *
+     * @param s
+     * @return
+     */
     public int longestValidParentheses2(String s) {
         int maxCount = 0;
         Deque<Integer> stack = new ArrayDeque<>();
