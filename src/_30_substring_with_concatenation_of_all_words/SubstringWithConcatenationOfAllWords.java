@@ -1,4 +1,4 @@
-package _30_SubstringWithConcatenationOfAllWords;
+package _30_substring_with_concatenation_of_all_words;
 
 import java.util.ArrayList;
 import java.util.HashMap;
