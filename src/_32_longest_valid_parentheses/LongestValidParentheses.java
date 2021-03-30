@@ -34,9 +34,6 @@ public class LongestValidParentheses {
 
     /**
      * 使用栈
-     *
-     * @param s
-     * @return
      */
     public int longestValidParentheses2(String s) {
         int maxCount = 0;
