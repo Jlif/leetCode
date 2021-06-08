@@ -18,24 +18,36 @@ package _38_count_and_say;
 public class CountAndSay {
 
     public String countAndSay(int n) {
-        if (n == 0) return "";
-        String ans = "1";//返回值
-        String temp;    //临时的外观数组
-        while (n > 0) {    //循环n-1次
-            temp = "";//这里一定记得要初始化为空，否则就是直接加在上一次结果的后面。
-            for (int i = 0; i < ans.length(); i++) {  //只要还没有遍历结束，继续循环
-                int count = 1;
-                char key = ans.charAt(i);
-                while (ans.length() > i+1 && ans.charAt(i++) == key) {
-                    count++;//这里注意：it要先自加1
-                }
-                temp += count;//将个数加在字符串后面
-                temp += key;//将字符加在后面
-            }
-            ans = temp;//更新结果
+        if (n == 0) {
+            return "";
+        }
+        if (n == 1) {
+            return "1";
+        }
+        String ans = "1";
+        while (n > 1) {
+            ans = sub(ans);
             n--;
         }
         return ans;
+    }
+
+    private String sub(String source) {
+        String ans = "";
+        char[] characters = source.toCharArray();
+        char tmp = '0';
+        int count = 1;
+        for (int i = 0; i < characters.length; i++) {
+            if (tmp == characters[i]) {
+                count++;
+            } else {
+                ans = ans + count + Character.getNumericValue(tmp);
+                count = 1;
+            }
+            tmp = characters[i];
+        }
+        ans = ans + count + Character.getNumericValue(tmp);
+        return ans.substring(2);
     }
 
     public static void main(String[] args) {
